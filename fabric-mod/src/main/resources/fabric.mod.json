@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "lumivoids-fabric-developer-helper",
+	"version": "${version}",
+	"name": "Lumivoids-Fabric-Developer-Helper",
+	"description": "Mod for developers, if you use it - you know this shit",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/lumivoids-fabric-developer-helper/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "ua.pp.lumivoid.lumivoids_fabric_developer_helper.LumivoidsFabricDeveloperHelper",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"lumivoids-fabric-developer-helper.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.7",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
