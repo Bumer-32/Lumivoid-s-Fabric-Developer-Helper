@@ -9,6 +9,11 @@ class LumivoidsFabricDeveloperPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val extensionOptions = project.extensions.create("lumivoidsDev", LumivoidsDevExtension::class.java)
 
+        project.repositories.maven {
+            it.name = "Lumivoid"
+            it.setUrl("https://maven.lumivoid.pp.ua/repository/lumivoid/")
+        }
+
         project.dependencies.add("modRuntimeOnly", "ua.pp.lumivoid:lumivoids-fabric-developer-helper-mod:${Constants.PLUGIN_VERSION}")
 
         project.tasks.register("reloadThisScreen") {
@@ -20,7 +25,6 @@ class LumivoidsFabricDeveloperPlugin : Plugin<Project> {
             }
         }
     }
-
 
     private fun connectAndSend(options: LumivoidsDevExtension, message: String) {
         Socket(options.minecraftIP, options.minecraftPort).use { socket ->
