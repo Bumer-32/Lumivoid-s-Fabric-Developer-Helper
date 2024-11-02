@@ -56,7 +56,6 @@ publishing {
     publications {
         create("mavenJava", MavenPublication) {
             artifactId = project.archives_base_name
-            groupId = project.publish_group
             version = version
             //noinspection GroovyAssignabilityCheck
             from components.java
