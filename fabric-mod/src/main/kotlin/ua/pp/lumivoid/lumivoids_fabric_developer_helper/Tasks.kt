@@ -7,6 +7,7 @@ enum class Tasks {
         override fun run() {
             logger.info("Reloading this screen")
 
+            MinecraftClient.getInstance().setScreen(null)
             MinecraftClient.getInstance().setScreen(Options.currentMinecraftScreen)
         }
     };

@@ -20,6 +20,6 @@ pluginManagement {
 -in build.gradle
 ```groovy
 plugins {
-    id 'ua.pp.lumivoid.gradle.lumivoids_fabric_developer_helper.lumivoids-fabric-developer-helper-plugin' version '1.0.0'
+    id 'ua.pp.lumivoid.gradle.lumivoids_fabric_developer_helper.lumivoids-fabric-developer-helper-plugin' version '1.0.1'
 }
 ```

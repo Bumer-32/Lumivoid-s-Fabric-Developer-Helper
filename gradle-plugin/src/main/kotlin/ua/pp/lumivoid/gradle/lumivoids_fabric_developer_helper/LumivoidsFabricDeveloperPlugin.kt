@@ -24,19 +24,28 @@ class LumivoidsFabricDeveloperPlugin : Plugin<Project> {
                 connectAndSend(extensionOptions, "reloadThisScreen")
             }
         }
+
+        project.tasks.named("classes").configure {
+            it.finalizedBy("reloadThisScreen")
+        }
     }
 
     private fun connectAndSend(options: LumivoidsDevExtension, message: String) {
-        Socket(options.minecraftIP, options.minecraftPort).use { socket ->
-            val output = socket.outputStream.bufferedWriter()
-            println("Connected to minecraft")
+        try {
+            Socket(options.minecraftIP, options.minecraftPort).use { socket ->
+                val output = socket.outputStream.bufferedWriter()
+                println("Connected to minecraft")
 
-            output.write(message)
-            output.flush()
-            println("Sent message: $message")
+                output.write(message)
+                output.flush()
+                println("Sent message: $message")
 
-            output.close()
-            socket.close()
+                output.close()
+                socket.close()
+            }
+        } catch (e: Exception) {
+            println("Failed to connect to minecraft")
+            e.printStackTrace()
         }
     }
 }
