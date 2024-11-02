@@ -3,13 +3,14 @@
 	"id": "lumivoids-fabric-developer-helper",
 	"version": "${version}",
 	"name": "Lumivoids-Fabric-Developer-Helper",
-	"description": "Mod for developers, if you use it - you know this shit",
+	"description": "Auto added mod for developers, if you use it - you know this shit",
 	"authors": [
-		"Me!"
+		"Bumer_32"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://lumivoid.pp.ua/",
+		"sources": "https://github.com/Bumer-32/Lumivoid-s-Fabric-Developer-Helper",
+		"issues": "https://github.com/Bumer-32/Lumivoid-s-Fabric-Developer-Helper/issues"
 	},
 	"license": "Apache-2.0",
 	"icon": "assets/lumivoids-fabric-developer-helper/icon.png",

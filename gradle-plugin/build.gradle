@@ -1,8 +1,8 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '2.0.21'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'maven-publish'
+    id 'java-gradle-plugin'
 }
-
-group = 'ua.pp.lumivoid'
 
 repositories {
     mavenCentral()
@@ -11,6 +11,68 @@ repositories {
 dependencies {
 }
 
+gradlePlugin {
+    plugins {
+        create("lumivoidsFabricDeveloperPlugin") {
+            id = "${project.maven_group}.${project.archives_base_name}"
+            implementationClass = "${project.maven_group}.LumivoidsFabricDeveloperPlugin"
+        }
+    }
+}
+
 kotlin {
     jvmToolchain(21)
+}
+
+jar {
+    from("../LICENSE")
+}
+
+java {
+    withSourcesJar()
+}
+
+base {
+    archivesName = "${project.archives_base_name}"
+}
+
+tasks.register("generateVersionFile") {
+    doLast {
+        //noinspection GrDeprecatedAPIUsage
+        def versionFile = file("$buildDir/generated-resources/version.txt")
+        versionFile.parentFile.mkdirs()
+        versionFile.text = project.version
+    }
+}
+processResources {
+    //noinspection GrDeprecatedAPIUsage
+    from("$buildDir/generated-resources") {
+        include "version.txt"
+    }
+    dependsOn tasks.generateVersionFile
+}
+
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            artifactId = project.archives_base_name
+            groupId = project.publish_group
+            version = version
+            //noinspection GroovyAssignabilityCheck
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'Lumivoid'
+            url = 'https://maven.lumivoid.pp.ua/repository/lumivoid/'
+
+            credentials {
+                username = project.hasProperty("mavenUsername") ? project.mavenUsername : System.getenv("MAVEN_USERNAME")
+                password = project.hasProperty("mavenPassword") ? project.mavenPassword : System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
+
 }

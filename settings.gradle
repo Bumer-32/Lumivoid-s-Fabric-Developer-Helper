@@ -10,3 +10,5 @@ pluginManagement {
 }
 
 include("fabric-mod", "gradle-plugin")
+
+rootProject.projectDir = rootDir

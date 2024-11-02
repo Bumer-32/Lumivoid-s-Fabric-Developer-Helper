@@ -1,13 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id 'fabric-loom' version '1.8.11'
+	id "org.jetbrains.kotlin.plugin.serialization"
+	id "org.jetbrains.kotlin.jvm"
 	id 'maven-publish'
-	id "org.jetbrains.kotlin.jvm" version "2.0.21"
+	id 'fabric-loom'
 }
 
 base {
-	archivesName = project.archives_base_name
+	archivesName = "${project.archives_base_name}"
 }
 
 repositories {
@@ -56,20 +57,25 @@ jar {
 	from("../LICENSE")
 }
 
-// configure the maven publication
 publishing {
 	publications {
 		create("mavenJava", MavenPublication) {
 			artifactId = project.archives_base_name
-			from components.java
+			groupId = project.publish_group
+			version = version
+            //noinspection GroovyAssignabilityCheck
+            from components.java
 		}
 	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
+		maven {
+			name = 'Lumivoid'
+			url = 'https://maven.lumivoid.pp.ua/repository/lumivoid/'
+
+			credentials {
+				username = project.hasProperty("mavenUsername") ? project.mavenUsername : System.getenv("MAVEN_USERNAME")
+				password = project.hasProperty("mavenPassword") ? project.mavenPassword : System.getenv("MAVEN_PASSWORD")
+			}
+		}
 	}
 }
