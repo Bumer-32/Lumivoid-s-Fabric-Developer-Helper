@@ -7,8 +7,9 @@ enum class Tasks {
         override fun run() {
             logger.info("Reloading this screen")
 
+            val currScreen = MinecraftClient.getInstance().currentScreen
             MinecraftClient.getInstance().setScreen(null)
-            MinecraftClient.getInstance().setScreen(Options.currentMinecraftScreen)
+            MinecraftClient.getInstance().setScreen(currScreen)
         }
     };
     protected val logger = Constants.LOGGER
