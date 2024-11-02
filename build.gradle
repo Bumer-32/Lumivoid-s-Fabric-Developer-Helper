@@ -13,3 +13,8 @@ tasks.register("publishAll") {
     group = "publishing"
     dependsOn subprojects.collect { it.tasks.named('publish') }.findAll { it != null }
 }
+
+tasks.register("buildAll") {
+    group = "build"
+    dependsOn subprojects.collect { it.tasks.named('build') }.findAll { it != null }
+}
